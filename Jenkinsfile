@@ -13,8 +13,10 @@ pipeline {
 				}
 			}
 		  steps {
+			script{
 				currentBuild.result = 'ABORTED'
 				error('Stopping early...')
+				}
 		  }
 		}
 		
