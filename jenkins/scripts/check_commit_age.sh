@@ -1,5 +1,3 @@
-
-
 TOTAL_COMMITS=$(git rev-list --count HEAD)
 
 
