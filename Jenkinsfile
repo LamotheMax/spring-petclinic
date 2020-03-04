@@ -65,9 +65,8 @@ pipeline {
 
 def needsBisect(){
 
-	def last_commit= (env.GIT_PREVIOUS_SUCCESSFUL_COMMIT).trim();
-	def since_last_success=sh (script:'git log $last_commit^..HEAD --pretty=oneline | wc -l', returnStdout: true).trim();
-	def at_least_eight=(( $since_last_success / 8 ))
+	since_last_success=sh (script:'git log {env.GIT_PREVIOUS_SUCCESSFUL_COMMIT).trim()}^..HEAD --pretty=oneline | wc -l', returnStdout: true).trim();
+	at_least_eight=(( $since_last_success / 8 ))
 	if (at_least_eight.greaterThanOrEqualTo(1)){
 		return 1;
 		}
