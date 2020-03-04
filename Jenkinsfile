@@ -41,25 +41,19 @@ pipeline {
 		  }
 		}
 		
-		stage('SKIP MARKER') {
-			when{
-				branch 'master'
-				expression{
-					return env.skipping == 'BREAK';
-				}
-			}
-		  steps {
-			currentBuild.result = 'ABORTED'
-			error('Stopping early...')
-		  }
-		}
 	}
   post{
 	success{
 		echo 'passed'
 	}
 	failure{
-		sh './jenkins/scripts/bisect.sh'
+		if (env.skipping == 'BREAK'){
+			currentBuild.result = 'ABORTED'
+		}
+		else{
+			echo('Bisecting')
+			sh './jenkins/scripts/bisect.sh'
+		}
 	}
   }
 }
