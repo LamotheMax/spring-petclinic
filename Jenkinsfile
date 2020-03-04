@@ -6,7 +6,7 @@ pipeline {
   stages {
 
 		stage('Fail Early') {
-			if( branch 'master' && (${env.skipping}).equals("BREAK")){
+			if( ((env.branch).equals( 'master')) && (${env.skipping}).equals("BREAK")){
 				currentBuild.result = 'ABORTED'
 				error('Stopping early...')
 			}
