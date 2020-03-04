@@ -17,7 +17,7 @@ pipeline {
 			}
 			steps {
 				script { currentBuild.result = 'ABORTED'}
-				error(FailedEarly)
+				error("FailedEarly WOOT WOOT")
 			}
 		}
 		
