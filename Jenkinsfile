@@ -15,9 +15,6 @@ pipeline {
 		stage('Fail Early') {
 			when{
 				branch 'master'
-				expression{
-					return ("${env.SKIP_STATUS}").equals("BREAK");
-				}
 			}
 			steps {
 				error('Failed early')
