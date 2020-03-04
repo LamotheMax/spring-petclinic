@@ -82,7 +82,7 @@ def needsBisect(){
 	since_last_success=sh (script:'git log $last_commit^..HEAD --pretty=oneline | wc -l', returnStdout: true).trim()
 	echo $since_last_success
 	at_least_eight=$(( $since_last_success / 8 ))
-	if (( at_least_eight >= 1 ));
+	if ((at_least_eight>=1));
 	then 
 		echo 1;
 	else
