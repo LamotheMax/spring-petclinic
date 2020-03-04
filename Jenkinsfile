@@ -1,6 +1,6 @@
 pipeline {
 	environment{
-		SKIP_STATUS = ("${sh(script:'./jenkins/scripts/check_commit_age.sh', returnStdout: true)}")
+		SKIP_STATUS = "${sh(script:'./jenkins/scripts/check_commit_age.sh', returnStdout: true)}"
 	}
   agent any
   stages {
