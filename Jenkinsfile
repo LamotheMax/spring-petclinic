@@ -1,6 +1,6 @@
 pipeline {
 	environment {
-		SKIP_STATUS = "${sh(script:'./jenkins/scripts/check_commit_age.sh', returnStdout: true)}"
+		SKIP_STATUS = "${sh(script:'./jenkins/scripts/check_commit_age.sh', returnStdout: true).trim()}"
 	}
   agent any
   stages {
@@ -9,7 +9,7 @@ pipeline {
 			when{
 				branch 'master'
 				expression{
-					return "${env.SKIP_STATUS}".equals("BREAK\n");
+					return "${env.SKIP_STATUS}".equals("BREAK");
 				}
 			}
 			steps {
@@ -21,7 +21,7 @@ pipeline {
 			when{
 				branch 'master'
 				expression{
-					return "${env.SKIP_STATUS}".equals("CHECK\n");
+					return "${env.SKIP_STATUS}".equals("CHECK");
 				}
 			}
 			steps {
@@ -33,7 +33,7 @@ pipeline {
 			when{
 				branch 'master'
 				expression{
-					return "${env.SKIP_STATUS}".equals("CHECK\n");
+					return "${env.SKIP_STATUS}".equals("CHECK");
 				}
 			}
 		  steps {
@@ -45,7 +45,7 @@ pipeline {
 			when{
 				branch 'master'
 				expression{
-					return "${env.SKIP_STATUS}".equals("CHECK\n");
+					return "${env.SKIP_STATUS}".equals("CHECK");
 				}
 			}
 		  steps {
