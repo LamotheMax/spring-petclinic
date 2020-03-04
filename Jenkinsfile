@@ -11,7 +11,7 @@ pipeline {
 			}
 			steps {
 			echo env.skipping
-			mvn -B compile
+			sh 'mvn -B compile'
 			}
 		}
 
