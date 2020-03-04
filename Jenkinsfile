@@ -12,9 +12,10 @@ pipeline {
 					return (${env.skipping}).equals("BREAK");
 				}
 			}
-		  steps {
-			script{currentBuild.reslt = 'ABORT'}
-			error("GARBAGE")
+			steps {
+				script{currentBuild.result = 'ABORT'}
+				error("GARBAGE")
+			}
 		}
 		
 		stage('build') {
@@ -55,12 +56,11 @@ pipeline {
 	}
   post{
 	success{
-		echo 'passed'
+		echo('passed')
 	}
 	failure{
 		echo('Bisecting')
 		sh './jenkins/scripts/bisect.sh'
 	}
-	
   }
 }
