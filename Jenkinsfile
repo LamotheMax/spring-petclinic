@@ -13,6 +13,7 @@ pipeline {
 				}
 			}
 		  steps {
+			currentBuild.result = 'ABORTED'
 			sh 'exit 1'
 		  }
 		}
@@ -59,9 +60,7 @@ pipeline {
 	}
 	failure{
 		script{
-			if ((${env.skipping}).equals("BREAK")){
-				currentBuild.result = 'ABORTED'
-			}
+
 			else{
 				echo('Bisecting')
 				sh './jenkins/scripts/bisect.sh'
