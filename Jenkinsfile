@@ -29,7 +29,10 @@ pipeline {
 	}
 	
   post{
-	success{mail to: lamothe.max@gmail.com, subject: 'The pipeline passed :('
+	success{
+		mail to: 'lamothe.max@gmail.com', 
+		subject: 'The pipeline passed :('
+		body: 'lol'
 	}
 	failure{
 		sh './jenkins/scripts/bisect.sh'
