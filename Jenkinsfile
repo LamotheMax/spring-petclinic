@@ -40,6 +40,19 @@ pipeline {
 			sh './jenkins/scripts/deliver.sh'
 		  }
 		}
+		
+		stage('SKIP MARKER') {
+			when{
+				branch 'master'
+				expression{
+					return env.skipping == 'BREAK';
+				}
+			}
+		  steps {
+			currentBuild.result = 'ABORTED'
+			error('Stopping early...')
+		  }
+		}
 	}
   post{
 	success{
