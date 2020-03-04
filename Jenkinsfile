@@ -74,8 +74,7 @@ pipeline {
 			sh "git bisect run mvn clean test"
 			sh "git bisect reset"
     	}
-		}
-  }
+	}
 }
 
 def needsBisect(){
