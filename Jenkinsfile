@@ -9,11 +9,12 @@ pipeline {
 				branch 'master'
 				
 				expression{
-				env.skipping == 'CHECK';
+					env.skipping != 'BREAK';
 				}
 			}
 			steps {
-				mvn -B compile
+			echo env.skipping
+			mvn -B compile
 			}
 		}
 
