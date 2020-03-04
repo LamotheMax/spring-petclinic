@@ -17,6 +17,7 @@ pipeline {
 				branch 'master'
 			}
 			steps {
+				currentBuild.result = 'ABORTED'
 				error('Failed early')
 			}
 		}
