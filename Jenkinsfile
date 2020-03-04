@@ -18,12 +18,13 @@ pipeline {
 			steps {
 				error(FailedEarly)
 			}
-		}
-		post{
-			failure{
-				currentBuild.result = 'ABORTED'
+			post{
+				failure{
+					currentBuild.result = 'ABORTED'
+				}
 			}
 		}
+
 		
 		stage('build') {
 			when{
