@@ -11,7 +11,7 @@ pipeline {
 				error('Stopping early...')
 			}
 			steps{
-				throw new FlowInterruptedException(Result.ABORTED)
+				sh 'echo test'
 			}
 		}
 		
