@@ -64,17 +64,6 @@ pipeline {
 		  }
 		}
 	}
-	post{
-		success{
-			echo "passed"
-		}
-		failure{
-			echo "Bisecting"
-			sh "git bisect start ${env.GIT_COMMIT} ${env.GIT_PREVIOUS_SUCCESSFUL_COMMIT}"
-			sh "git bisect run mvn clean test"
-			sh "git bisect reset"
-    	}
-	}
 }
 
 def needsBisect(){
