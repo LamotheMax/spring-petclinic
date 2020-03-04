@@ -9,7 +9,7 @@ pipeline {
 			when{
 				branch 'master'
 				expression{
-					return (${env.skipping}).equals("CHECK");
+					return (env.skipping).equals("CHECK");
 				}
 			}
 			steps {
@@ -21,7 +21,7 @@ pipeline {
 			when{
 				branch 'master'
 				expression{
-					return (${env.skipping}).equals("CHECK");
+					return (env.skipping).equals("CHECK");
 				}
 			}
 		  steps {
@@ -33,7 +33,7 @@ pipeline {
 			when{
 				branch 'master'
 				expression{
-					return (${env.skipping}).equals("CHECK");
+					return (env.skipping).equals("CHECK");
 				}
 			}
 		  steps {
