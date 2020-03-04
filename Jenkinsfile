@@ -7,6 +7,7 @@ pipeline {
 		stage('build') {
 			when{
 				branch 'master'
+				
 				expression{
 				env.skipping == 'CHECK';
 				}
@@ -27,9 +28,8 @@ pipeline {
 			sh './jenkins/scripts/deliver.sh'
 		  }
 		}
-		}
+	}
 	
-  }
   post{
 	success{mail to: lamothe.max@gmail.com, subject: 'The pipeline passed :('
 	}
