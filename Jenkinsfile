@@ -1,3 +1,6 @@
+import hudson.model.Result
+import org.jenkinsci.plugins.workflow.steps.FlowInterruptedException
+
 pipeline {
 	environment{
 		skipping = "${sh(script:'./jenkins/scripts/check_commit_age.sh', returnStdout: true)}"
@@ -13,8 +16,7 @@ pipeline {
 				}
 			}
 			steps {
-				script{currentBuild.result = 'ABORTED'}
-				error("GARBAGE")
+				script{throw new FlowInterruptedException(Result.ABORTED)}
 			}
 		}
 		
