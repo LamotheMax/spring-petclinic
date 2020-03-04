@@ -16,7 +16,7 @@ pipeline {
 			when{
 				branch 'master'
 				expression{
-					return "${env.SKIP_STATUS}".equals("BREAK");
+					return ("${env.SKIP_STATUS}").equals("BREAK");
 				}
 			}
 			steps {
@@ -28,7 +28,7 @@ pipeline {
 			when{
 				branch 'master'
 				expression{
-					return "${env.SKIP_STATUS}".equals("CHECK");
+					return ("${env.SKIP_STATUS}").equals("CHECK");
 				}
 			}
 			steps {
@@ -40,7 +40,7 @@ pipeline {
 			when{
 				branch 'master'
 				expression{
-					return "${env.SKIP_STATUS}".equals("CHECK");
+					return ("${env.SKIP_STATUS}").equals("CHECK");
 				}
 			}
 		  steps {
@@ -52,7 +52,7 @@ pipeline {
 			when{
 				branch 'master'
 				expression{
-					return "${env.SKIP_STATUS}".equals("CHECK");
+					return ("${env.SKIP_STATUS}").equals("CHECK");
 				}
 			}
 		  steps {
