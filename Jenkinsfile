@@ -5,10 +5,15 @@ pipeline {
   agent any
   stages {
   
-  		stage('Fail Early') {
+		stage('Fail Early') {
+			when{
+				branch 'master'
+				expression{
+					return "${env.SKIP_STATUS}".equals("BREAK\n");
+				}
+			}
 			steps {
-				echo "${env.SKIP_STATUS}"
-				echo "BREAK\n"
+				error('Failed early')
 			}
 		}
 		
@@ -16,7 +21,7 @@ pipeline {
 			when{
 				branch 'master'
 				expression{
-					return "${env.SKIP_STATUS}".equals("CHECK");
+					return "${env.SKIP_STATUS}".equals("CHECK\n");
 				}
 			}
 			steps {
@@ -28,7 +33,7 @@ pipeline {
 			when{
 				branch 'master'
 				expression{
-					return "${env.SKIP_STATUS}".equals("CHECK");
+					return "${env.SKIP_STATUS}".equals("CHECK\n");
 				}
 			}
 		  steps {
@@ -40,7 +45,7 @@ pipeline {
 			when{
 				branch 'master'
 				expression{
-					return "${env.SKIP_STATUS}".equals("CHECK");
+					return "${env.SKIP_STATUS}".equals("CHECK\n");
 				}
 			}
 		  steps {
