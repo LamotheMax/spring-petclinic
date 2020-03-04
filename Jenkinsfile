@@ -13,7 +13,7 @@ pipeline {
 				}
 			}
 			steps {
-				script{currentBuild.result = 'ABORT'}
+				script{currentBuild.result = 'ABORTED'}
 				error("GARBAGE")
 			}
 		}
