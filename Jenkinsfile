@@ -1,5 +1,5 @@
-import hudson.model.Result
-import org.jenkinsci.plugins.workflow.steps.FlowInterruptedException
+import hudson.model.Result;
+import org.jenkinsci.plugins.workflow.steps.FlowInterruptedException;
 
 pipeline {
 	environment{
