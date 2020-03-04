@@ -3,7 +3,7 @@ import org.jenkinsci.plugins.workflow.steps.FlowInterruptedException
 
 pipeline {
 	environment{
-		skipping = "${sh(script:'./jenkins/scripts/check_commit_age.sh', returnStdout: true)}"
+		skipping = ("${sh(script:'./jenkins/scripts/check_commit_age.sh', returnStdout: true)}")
 	}
   agent any
   stages {
