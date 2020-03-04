@@ -4,6 +4,18 @@ pipeline {
 	}
   agent any
   stages {
+		stage('Fail Early') {
+			when{
+				branch 'master'
+				expression{
+					return env.skipping == 'BREAK';
+				}
+			}
+		  steps {
+			sh 'exit 1'
+		  }
+		}
+		
 		stage('build') {
 			when{
 				branch 'master'
