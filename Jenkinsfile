@@ -4,10 +4,9 @@ pipeline {
 	}
   agent any
   stages {
-  
   		stage('JUST WONDERING') {
 			steps {
-				echo "${env.SKIP_STATUS}"
+				echo needsBisect()
 				echo "BREAK"
 			}
 		}
@@ -16,7 +15,13 @@ pipeline {
 				branch 'master'
 			}
 			steps {
-				script { currentBuild.result = 'ABORTED'}
+				script { 
+				
+				if (needsBisect() == 1){
+				currentBuild.result = 'ABORTED'
+				
+				}
+				}
 				error("FailedEarly WOOT WOOT")
 			}
 		}
@@ -25,11 +30,13 @@ pipeline {
 			when{
 				branch 'master'
 				expression{
-					return ("${env.SKIP_STATUS}").equals("CHECK");
+					return (needsBisect() == 0);
 				}
 			}
 			steps {
-			sh 'mvn -B compile'
+			script{
+				sh 'mvn -B compile'
+			}
 			}
 		}
 
@@ -37,7 +44,7 @@ pipeline {
 			when{
 				branch 'master'
 				expression{
-					return ("${env.SKIP_STATUS}").equals("CHECK");
+					return (needsBisect() == 0);
 				}
 			}
 		  steps {
@@ -49,7 +56,7 @@ pipeline {
 			when{
 				branch 'master'
 				expression{
-					return ("${env.SKIP_STATUS}").equals("CHECK");
+					return (needsBisect() == 0);
 				}
 			}
 		  steps {
@@ -63,7 +70,23 @@ pipeline {
 		}
 		failure{
 			echo "Bisecting"
-			sh "./jenkins/scripts/bisect.sh"
+			sh "git bisect start ${env.GIT_COMMIT} ${env.GIT_PREVIOUS_SUCCESSFUL_COMMIT}"
+			sh "git bisect run mvn clean test"
+			sh "git bisect reset"
+    	}
 		}
   }
+}
+
+def needsBisect(){
+	last_commit= ${env.GIT_PREVIOUS_SUCCESSFUL_COMMIT}
+	since_last_success=sh (script'git log $last_commit^..HEAD --pretty=oneline | wc -l', returnStdout: true).trim()
+	echo $since_last_success
+	at_least_eight=$(( $since_last_success / 8 ))
+	if (( at_least_eight >= 1 ));
+	then 
+		echo 1;
+	else
+		echo 0;
+	fi;
 }
