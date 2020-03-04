@@ -59,7 +59,7 @@ pipeline {
 	}
 	failure{
 		script{
-			if (("\${skipping}").equals("BREAK")){
+			if ((env.skipping).equals("BREAK")){
 				currentBuild.result = 'ABORTED'
 			}
 			else{
