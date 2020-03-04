@@ -9,7 +9,7 @@ pipeline {
 			when{
 				branch 'master'
 				expression{
-					return env.skipping.equals("BREAK");
+					return (env.skipping).equals("BREAK");
 				}
 			}
 		  steps {
@@ -21,7 +21,7 @@ pipeline {
 			when{
 				branch 'master'
 				expression{
-					return env.skipping.equals("CHECK");
+					return (env.skipping).equals("CHECK");
 				}
 			}
 			steps {
@@ -33,7 +33,7 @@ pipeline {
 			when{
 				branch 'master'
 				expression{
-					return env.skipping.equals("CHECK");
+					return (env.skipping).equals("CHECK");
 				}
 			}
 		  steps {
@@ -45,7 +45,7 @@ pipeline {
 			when{
 				branch 'master'
 				expression{
-					return env.skipping.equals("CHECK");
+					return (env.skipping).equals("CHECK");
 				}
 			}
 		  steps {
@@ -59,7 +59,7 @@ pipeline {
 	}
 	failure{
 		script{
-			if (env.skipping.equals("BREAK")){
+			if ((env.skipping).equals("BREAK")){
 				currentBuild.result = 'ABORTED'
 			}
 			else{
