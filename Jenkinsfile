@@ -5,6 +5,7 @@ pipeline {
   agent any
   stages {
 		stage('Fail Early') {
+			echo env.skipping
 			when{
 				branch 'master'
 				expression{
@@ -24,7 +25,6 @@ pipeline {
 				}
 			}
 			steps {
-			echo env.skipping
 			sh 'mvn -B compile'
 			}
 		}
