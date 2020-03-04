@@ -5,6 +5,13 @@ pipeline {
   agent any
   stages {
   
+  		stage('JUST WONDERING') {
+			steps {
+				echo "${env.SKIP_STATUS}"
+				echo "BREAK"
+			}
+		}
+  
 		stage('Fail Early') {
 			when{
 				branch 'master'
