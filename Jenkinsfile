@@ -1,28 +1,40 @@
 pipeline {
+	environment{
+		skipping = "${sh(script:'./jenkins/scripts/check_commit_age.sh', returnStdout: true)}"
+	}
   agent any
   stages {
-    stage('build') {
-      steps {
-        sh '''VAR=$(./jenkins/scripts/check_commit_age.sh)
+		stage('build') {
+			when{
+				branch 'master'
+				expression{
+				env.skipping == 'CHECK';
+				}
+			}
+			steps {
+				mvn -B compile
+			}
+		}
 
-if [ $VAR == CHECK ]
-then
-mvn -B compile
-fi'''
-      }
-    }
+		stage('test') {
+		  steps {
+			sh 'mvn test'
+		  }
+		}
 
-    stage('test') {
-      steps {
-        sh 'mvn test'
-      }
-    }
-
-    stage('deliver') {
-      steps {
-        sh './jenkins/scripts/deliver.sh'
-      }
-    }
-
+		stage('deliver') {
+		  steps {
+			sh './jenkins/scripts/deliver.sh'
+		  }
+		}
+		}
+	
+  }
+  post{
+	success{mail to: lamothe.max@gmail.com, subject: 'The pipeline passed :('
+	}
+	failure{
+		sh './jenkins/scripts/bisect.sh'
+	}
   }
 }
