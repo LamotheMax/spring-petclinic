@@ -83,7 +83,7 @@ def needsBisect(){
 	script{
 	echo $since_last_success
 	at_least_eight=$(( $since_last_success / 8 ))
-	if ((at_least_eight>=1));
+	if ($at_least_eight >= 1);
 	then 
 		echo 1;
 	else
