@@ -40,19 +40,20 @@ pipeline {
 			sh './jenkins/scripts/deliver.sh'
 		  }
 		}
-		
 	}
   post{
 	success{
 		echo 'passed'
 	}
 	failure{
-		if (env.skipping == 'BREAK'){
-			currentBuild.result = 'ABORTED'
-		}
-		else{
-			echo('Bisecting')
-			sh './jenkins/scripts/bisect.sh'
+		script{
+			if (env.skipping == 'BREAK'){
+				currentBuild.result = 'ABORTED'
+			}
+			else{
+				echo('Bisecting')
+				sh './jenkins/scripts/bisect.sh'
+			}
 		}
 	}
   }
