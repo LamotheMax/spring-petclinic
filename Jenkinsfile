@@ -18,12 +18,24 @@ pipeline {
 		}
 
 		stage('test') {
+			when{
+				branch 'master'
+				expression{
+					return env.skipping == 'CHECK';
+				}
+			}
 		  steps {
 			sh 'mvn test'
 		  }
 		}
 
 		stage('deliver') {
+			when{
+				branch 'master'
+				expression{
+					return env.skipping == 'CHECK';
+				}
+			}
 		  steps {
 			sh './jenkins/scripts/deliver.sh'
 		  }
