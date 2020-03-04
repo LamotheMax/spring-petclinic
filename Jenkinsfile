@@ -67,5 +67,5 @@ pipeline {
 }
 
 def needsBisect(){
-	echo env.GIT_PREVIOUS_SUCCESSFUL_COMMIT
+	return env.GIT_PREVIOUS_SUCCESSFUL_COMMIT;
 }
