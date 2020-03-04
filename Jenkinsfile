@@ -11,7 +11,6 @@ pipeline {
 				echo "BREAK"
 			}
 		}
-	try{
 		stage('Fail Early') {
 			when{
 				branch 'master'
@@ -20,11 +19,10 @@ pipeline {
 				error(FailedEarly)
 			}
 		}
-		} catch (e){
-			if (e.message == FailedEarly){
-			currentBuild.result = 'ABORTED'
-		}
-		throw e
+		post{
+			failure{
+				currentBuild.result = 'ABORTED'
+			}
 		}
 		
 		stage('build') {
