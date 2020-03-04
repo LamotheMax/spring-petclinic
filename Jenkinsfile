@@ -13,7 +13,7 @@ pipeline {
 				}
 			}
 		  steps {
-				urrentBuild.result = 'ABORTED'
+				currentBuild.result = 'ABORTED'
 				error('Stopping early...')
 		  }
 		}
