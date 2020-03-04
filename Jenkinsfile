@@ -57,4 +57,13 @@ pipeline {
 		  }
 		}
 	}
+	post{
+		success{
+			echo "passed"
+		}
+		failure{
+			echo "Bisecting"
+			sh "./jenkins/scripts/bisect.sh"
+		}
+  }
 }
