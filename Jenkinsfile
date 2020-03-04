@@ -10,6 +10,9 @@ pipeline {
 				currentBuild.result = 'ABORTED'
 				error('Stopping early...')
 			}
+			steps{
+				throw new FlowInterruptedException(Result.ABORTED)
+			}
 		}
 		
 		stage('build') {
