@@ -16,15 +16,10 @@ pipeline {
 				branch 'master'
 			}
 			steps {
+				script { currentBuild.result = 'ABORTED'}
 				error(FailedEarly)
 			}
-			post{
-				failure{
-					currentBuild.result = 'ABORTED'
-				}
-			}
 		}
-
 		
 		stage('build') {
 			when{
