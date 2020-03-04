@@ -58,7 +58,7 @@ pipeline {
 		echo 'passed'
 	}
 	failure{
-		script{
+
 			if ((${env.skipping}).equals("BREAK")){
 				currentBuild.result = 'ABORTED'
 			}
@@ -67,6 +67,6 @@ pipeline {
 				sh './jenkins/scripts/bisect.sh'
 			}
 		}
-	}
+	
   }
 }
