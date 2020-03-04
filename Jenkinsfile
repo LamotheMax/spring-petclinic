@@ -13,7 +13,7 @@ pipeline {
 			when{
 				branch 'master'
 				expression{
-					return "${env.skipping}" == "BREAK
+					return "${env.skipping}" == "BREAK";
 				}
 			}
 		  steps {
