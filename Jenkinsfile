@@ -6,13 +6,16 @@ pipeline {
   stages {
 
 		stage('Fail Early') {
-			if( (env.BRANCH_NAME == 'master') && (${env.skipping}).equals("BREAK")){
-				currentBuild.result = 'ABORTED'
+			when{
+				branch 'master'
+				expression{
+					return (${env.skipping}).equals("BREAK");
+				}
+			}
+		  steps {
+				urrentBuild.result = 'ABORTED'
 				error('Stopping early...')
-			}
-			steps{
-				sh 'echo test'
-			}
+		  }
 		}
 		
 		stage('build') {
@@ -59,5 +62,6 @@ pipeline {
 		echo('Bisecting')
 		sh './jenkins/scripts/bisect.sh'
 	}
+	
   }
 }
