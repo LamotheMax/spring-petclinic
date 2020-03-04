@@ -5,7 +5,7 @@ modulo=$((TOTAL_COMMITS % 8))
 
 if (( $modulo < 1 ))
 then
-	echo CHECK
+	echo "CHECK"
 else
-	echo BREAK
+	echo "BREAK"
 fi

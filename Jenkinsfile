@@ -8,7 +8,7 @@ pipeline {
   		stage('Fail Early') {
 			steps {
 				echo "${env.SKIP_STATUS}"
-				echo "BREAK"
+				echo "BREAK\n"
 			}
 		}
 		
