@@ -13,7 +13,7 @@ pipeline {
 				}
 			}
 		  steps {
-			sh 'exit 1'
+			sh 'exit 55'
 		  }
 		}
 		
@@ -59,7 +59,7 @@ pipeline {
 	}
 	failure{
 		script{
-			if ((env.skipping).equals("BREAK")){
+			if ((${env.skipping}).equals("BREAK")){
 				currentBuild.result = 'ABORTED'
 			}
 			else{
