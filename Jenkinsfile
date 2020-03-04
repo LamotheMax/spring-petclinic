@@ -7,7 +7,9 @@ pipeline {
 		stage('build') {
 			when{
 				branch 'master'
-				expression{return env.skipping != 'BREAK';}
+				expression{
+					return env.skipping == 'CHECK';
+				}
 			}
 			steps {
 			echo env.skipping
