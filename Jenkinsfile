@@ -61,10 +61,9 @@ pipeline {
 	failure{
 		script{
 
-			else{
 				echo('Bisecting')
 				sh './jenkins/scripts/bisect.sh'
-			}
+			
 		}
 	}
   }
