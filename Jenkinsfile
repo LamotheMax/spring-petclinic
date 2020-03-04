@@ -11,15 +11,20 @@ pipeline {
 				echo "BREAK"
 			}
 		}
-  
+	try{
 		stage('Fail Early') {
 			when{
 				branch 'master'
 			}
 			steps {
-				script(currentBuild.result = 'ABORTED')
-				error('Failed early')
+				error(FailedEarly)
 			}
+		}
+		} catch (e){
+			if (e.message == FailedEarly){
+			currentBuild.result = 'ABORTED'
+		}
+		throw e
 		}
 		
 		stage('build') {
