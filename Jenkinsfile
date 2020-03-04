@@ -4,8 +4,12 @@ pipeline {
 	}
   agent any
   stages {
+		stage('testing'){
+			steps{
+				echo env.skipping
+			}
+		}
 		stage('Fail Early') {
-			echo env.skipping
 			when{
 				branch 'master'
 				expression{
