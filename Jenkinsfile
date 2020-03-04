@@ -3,7 +3,12 @@ pipeline {
   stages {
     stage('build') {
       steps {
-        sh 'mvn -B compile'
+        sh '''VAR=$(./jenkins/scripts/check_commit_age.sh)
+
+if [ $VAR == CHECK ]
+then
+mvn -B compile
+fi'''
       }
     }
 
