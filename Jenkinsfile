@@ -1,7 +1,4 @@
 pipeline {
-	environment {
-		SKIP_STATUS = "${sh(script:'./jenkins/scripts/check_commit_age.sh', returnStdout: true).trim()}"
-	}
   agent any
   stages {
   		stage('JUST WONDERING') {
