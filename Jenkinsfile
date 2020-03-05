@@ -3,7 +3,7 @@ pipeline {
   stages {
   		stage('JUST WONDERING') {
 			steps {
-				echo needsBisect()
+				echo needsBisect().toString()
 				echo "BREAK"
 			}
 		}
