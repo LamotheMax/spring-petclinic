@@ -14,7 +14,7 @@ pipeline {
 			steps {
 				script { 
 				
-				if (needsBisect() == 1){
+				if (needsBisect() == 0){
 				currentBuild.result = 'ABORTED'
 				
 				}
@@ -27,7 +27,7 @@ pipeline {
 			when{
 				branch 'master'
 				expression{
-					return (needsBisect() == 0);
+					return (needsBisect() == 1);
 				}
 			}
 			steps {
@@ -41,7 +41,7 @@ pipeline {
 			when{
 				branch 'master'
 				expression{
-					return (needsBisect() == 0);
+					return (needsBisect() == 1);
 				}
 			}
 		  steps {
@@ -53,7 +53,7 @@ pipeline {
 			when{
 				branch 'master'
 				expression{
-					return (needsBisect() == 0);
+					return (needsBisect() == 1);
 				}
 			}
 		  steps {
