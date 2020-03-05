@@ -10,14 +10,13 @@ pipeline {
 		stage('Fail Early') {
 			when{
 				branch 'master'
+				expression{
+					return (needsBisect() == 0);
+				}
 			}
 			steps {
 				script { 
-				
-				if (needsBisect() == 0){
-				currentBuild.result = 'ABORTED'
-				
-				}
+					currentBuild.result = 'ABORTED'
 				}
 				error("FailedEarly WOOT WOOT")
 			}
