@@ -73,7 +73,8 @@ def needsBisect(){
 	
 	since_last_success=sh (script:"git log ${last_good_commit}^..HEAD --pretty=oneline | wc -l", returnStdout: true).trim();
 	int at_least_eight= (( since_last_success.toInteger() / 8 ))
-	if (at_least_eight.greaterThanOrEqualTo(1)){
+	int one = 1;
+	if (at_least_eight.greaterThanOrEqualTo(one)){
 		return 1;
 		}
 	else{
