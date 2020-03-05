@@ -69,7 +69,7 @@ def needsBisect(){
 		last_good_commit= (env.GIT_PREVIOUS_SUCCESSFUL_COMMIT).trim();
 		}
 	else{
-		return 0;
+		return 1;
 	}
 	
 	since_last_success=sh (script:"git log ${last_good_commit}^..HEAD --pretty=oneline | wc -l", returnStdout: true).trim();
