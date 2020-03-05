@@ -65,7 +65,7 @@ pipeline {
 
 def needsBisect(){
 	last_good_commit= (env.GIT_PREVIOUS_SUCCESSFUL_COMMIT);
-	if ($last_good_commit != null){
+	if (last_good_commit != null){
 		last_good_commit= (env.GIT_PREVIOUS_SUCCESSFUL_COMMIT).trim();
 		}
 	else{
@@ -73,8 +73,8 @@ def needsBisect(){
 	}
 	
 	since_last_success=sh (script:"git log ${last_good_commit}^..HEAD --pretty=oneline | wc -l", returnStdout: true).trim();
-	at_least_eight=(( $since_last_success / 8 ))
-	if (${at_least_eight}.greaterThanOrEqualTo(1)){
+	at_least_eight=(( since_last_success / 8 ))
+	if (at_least_eight.greaterThanOrEqualTo(1)){
 		return 1;
 		}
 	else{
